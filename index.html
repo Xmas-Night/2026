@@ -13,7 +13,6 @@
   font-family:'Orbitron',sans-serif;
 }
 
-/* Background */
 body{
   height:100vh;
   background:url('Xmas.png') center/cover no-repeat fixed;
@@ -24,7 +23,6 @@ body{
   color:#fff;
 }
 
-/* Hero Layout */
 .hero{
   text-align:center;
   position:absolute;
@@ -32,9 +30,6 @@ body{
   width:100%;
 }
 
-/* ============================
-   PERFECT CYBER GLITCH TITLE
-   ============================ */
 .title {
   font-size:4rem;
   font-weight:900;
@@ -82,7 +77,6 @@ body{
   100% { clip-path: inset(0 0 82% 0); transform: translate(-2px, 2px); }
 }
 
-/* Subtitle */
 .subtitle {
   margin-top:10px;
   font-size:1.2rem;
@@ -97,7 +91,6 @@ body{
 
 .gift-link:hover { color:#fff; }
 
-/* Countdown */
 .countdown {
   margin-top:25px;
   display:flex;
@@ -115,7 +108,6 @@ body{
 
 .time-box small { font-size:.8rem; opacity:0.8; }
 
-/* Music Button */
 .music{
   position:absolute;
   top:20px; right:25px;
@@ -128,7 +120,6 @@ body{
   border:1px solid #00eaff88;
 }
 
-/* SNOW – smooth & realistic */
 .snow-dot {
   position: fixed;
   border-radius: 50%;
@@ -170,11 +161,10 @@ body{
 <button class="music" onclick="toggleMusic()">Music: Off</button>
 
 <audio id="bgmusic" loop>
-  <source src="Xmas.mp3" type="audio/mpeg">
+  <source src="xmas.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* Countdown Script */
 const target=new Date(2025,11,25,0,0,0).getTime();
 setInterval(()=>{
   const now=Date.now();
@@ -186,7 +176,6 @@ setInterval(()=>{
   document.getElementById("seconds").innerText = Math.floor((diff % 60000) / 1000);
 },1000);
 
-/* Snow Script */
 document.addEventListener("DOMContentLoaded", () => {
   function createSnow() {
     for (let i = 0; i < 80; i++) {
@@ -209,7 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
   createSnow();
 });
 
-/* Music Toggle */
 function toggleMusic(){
   const m=document.getElementById("bgmusic");
   const btn=document.querySelector(".music");
@@ -226,3 +214,4 @@ function toggleMusic(){
 
 </body>
 </html>
+
