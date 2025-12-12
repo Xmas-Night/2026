@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Enter Your Name</title>
+<style>
+body{
+  height:100vh;margin:0;
+  display:flex;justify-content:center;align-items:center;flex-direction:column;
+  background:#05001a;
+  color:white;font-family:'Orbitron',sans-serif;
+}
+.box{
+  padding:40px 50px;border-radius:20px;
+  border:3px solid #7a00ff;
+  box-shadow:0 0 25px #7a00ff,0 0 40px #00eaff inset;
+  background:rgba(0,0,30,0.6);
+}
+.box h2{text-align:center;margin-bottom:20px;color:#8ad7ff;text-shadow:0 0 10px #00eaff;}
+input{
+  width:250px;padding:12px;border:none;border-radius:10px;
+  background:#111;color:white;
+  box-shadow:0 0 10px #00eaff inset;
+  font-size:1rem;text-align:center;
+}
+button{
+  margin-top:20px;padding:12px 25px;border:none;border-radius:10px;
+  background:#00eaff;color:#000;font-weight:bold;cursor:pointer;
+  box-shadow:0 0 15px #00eaff;
+}
+button:hover{background:#7a00ff;color:white;box-shadow:0 0 20px #7a00ff;}
+</style>
+</head>
+<body>
+<div class="box">
+  <h2>Enter Your Name</h2>
+  <input id="username" placeholder="Your Name..." />
+  <button onclick="go()">Continue</button>
+</div>
+<script>
+function go(){
+  let name=document.getElementById("username").value.trim();
+  if(name.length<1)return alert("Please enter your name");
+  window.location.href="your-gift.html?name="+encodeURIComponent(name);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Merry Christmas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0; padding:0; box-sizing:border-box;
+  font-family:'Orbitron',sans-serif;
+}
+
+/* Background */
+body{
+  height:100vh;
+  background:url('Xmas.png') center/cover no-repeat fixed;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
+
+/* Hero Layout */
+.hero{
+  text-align:center;
+  position:absolute;
+  top:10%;
+  width:100%;
+}
+
+/* ============================
+   PERFECT CYBER GLITCH TITLE
+   ============================ */
+.title {
+  font-size:4rem;
+  font-weight:900;
+  letter-spacing:3px;
+  color:#00d9ff;
+  position:relative;
+  text-transform:uppercase;
+  text-shadow:0 0 8px #00eaff, 0 0 20px #00eaff;
+}
+
+.title::before,
+.title::after {
+  content:"MERRY CHRISTMAS";
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+}
+
+.title::before {
+  text-shadow:-2px 0 magenta;
+  animation:glitch-1 2.2s infinite linear alternate-reverse;
+}
+
+.title::after {
+  text-shadow:3px 0 cyan;
+  animation:glitch-2 2.2s infinite linear alternate;
+}
+
+@keyframes glitch-1 {
+  0% { clip-path: inset(0 0 82% 0); transform: translate(-2px, -2px); }
+  20% { clip-path: inset(10% 0 28% 0); transform: translate(2px, 2px); }
+  40% { clip-path: inset(38% 0 20% 0); transform: translate(-2px, 1px); }
+  60% { clip-path: inset(82% 0 0 0); transform: translate(2px, -1px); }
+  80% { clip-path: inset(30% 0 40% 0); transform: translate(-1px, 2px); }
+  100% { clip-path: inset(0 0 82% 0); transform: translate(1px, -2px); }
+}
+
+@keyframes glitch-2 {
+  0% { clip-path: inset(0 0 82% 0); transform: translate(2px, 1px); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translate(-2px, -1px); }
+  40% { clip-path: inset(20% 0 40% 0); transform: translate(1px, 2px); }
+  60% { clip-path: inset(80% 0 0 0); transform: translate(-1px, -2px); }
+  80% { clip-path: inset(40% 0 30% 0); transform: translate(2px, 1px); }
+  100% { clip-path: inset(0 0 82% 0); transform: translate(-2px, 2px); }
+}
+
+/* Subtitle */
+.subtitle {
+  margin-top:10px;
+  font-size:1.2rem;
+  opacity:0.85;
+}
+
+.gift-link {
+  text-decoration:none;
+  color:#00eaff;
+  text-shadow:0 0 8px #00eaff;
+}
+
+.gift-link:hover { color:#fff; }
+
+/* Countdown */
+.countdown {
+  margin-top:25px;
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  text-align:center;
+}
+
+.time-box span:first-child {
+  font-size:2rem;
+  display:block;
+  font-weight:bold;
+  text-shadow:0 0 8px #00eaff;
+}
+
+.time-box small { font-size:.8rem; opacity:0.8; }
+
+/* Music Button */
+.music{
+  position:absolute;
+  top:20px; right:25px;
+  font-size:1rem;
+  background:#00d9ff33;
+  padding:10px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  backdrop-filter:blur(5px);
+  border:1px solid #00eaff88;
+}
+
+/* SNOW – smooth & realistic */
+.snow-dot {
+  position: fixed;
+  border-radius: 50%;
+  background: white;
+  filter: drop-shadow(0 0 6px #ffffff);
+  pointer-events: none;
+  animation: snowFall linear infinite;
+}
+
+@keyframes snowFall {
+  to { transform: translateY(110vh); }
+}
+
+@media(max-width:600px){
+  .title{ font-size:2.7rem; }
+  .countdown{ gap:12px; }
+  .time-box span:first-child{ font-size:1.4rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+  <div class="title">MERRY CHRISTMAS</div>
+
+  <div class="subtitle">
+    <a href="enter-name.html" class="gift-link">A Gift From Me</a>
+  </div>
+
+  <div class="countdown">
+    <div class="time-box"><span id="days">00</span><small>Days</small></div>
+    <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+    <div class="time-box"><span id="minutes">00</span><small>Minutes</small></div>
+    <div class="time-box"><span id="seconds">00</span><small>Seconds</small></div>
+  </div>
+</div>
+
+<button class="music" onclick="toggleMusic()">Music: Off</button>
+
+<audio id="bgmusic" loop>
+  <source src="Xmas.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* Countdown Script */
+const target=new Date(2025,11,25,0,0,0).getTime();
+setInterval(()=>{
+  const now=Date.now();
+  const diff=target-now;
+
+  document.getElementById("days").innerText = Math.floor(diff / 86400000);
+  document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000);
+  document.getElementById("minutes").innerText = Math.floor((diff % 3600000) / 60000);
+  document.getElementById("seconds").innerText = Math.floor((diff % 60000) / 1000);
+},1000);
+
+/* Snow Script */
+document.addEventListener("DOMContentLoaded", () => {
+  function createSnow() {
+    for (let i = 0; i < 80; i++) {
+      let flake = document.createElement("div");
+      flake.className = "snow-dot";
+      let size = 3 + Math.random() * 5;
+
+      flake.style.width = size + "px";
+      flake.style.height = size + "px";
+      flake.style.left = Math.random() * 100 + "vw";
+      flake.style.top = (-20 - Math.random() * 20) + "vh";
+
+      flake.style.animationDuration = (5 + Math.random()*6) + "s";
+      flake.style.animationDelay = Math.random()*3 + "s";
+      flake.style.opacity = 0.4 + Math.random()*0.6;
+
+      document.body.appendChild(flake);
+    }
+  }
+  createSnow();
+});
+
+/* Music Toggle */
+function toggleMusic(){
+  const m=document.getElementById("bgmusic");
+  const btn=document.querySelector(".music");
+
+  if(m.paused){
+    m.play();
+    btn.textContent="Music: On";
+  } else {
+    m.pause();
+    btn.textContent="Music: Off";
+  }
+}
+</script>
+
+</body>
+</html>
