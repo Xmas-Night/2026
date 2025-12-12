@@ -9,7 +9,9 @@
 
 <style>
 *{
-  margin:0;padding:0;box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
   font-family:'Orbitron',sans-serif;
 }
 
@@ -17,18 +19,22 @@ body{
   height:100vh;
   width:100vw;
   overflow:hidden;
-  background:url('Xmas2.png') center/cover no-repeat;
+  background-image:url('Xmas2.png'); /* Desktop */
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
   display:flex;
   justify-content:center;
-  align-items:flex-start;
-  padding-top:12vh;
+  align-items:center;
   color:#fff;
 }
 
-@media(max-width:600px){
+@media(max-width:700px){
   body{
-    background:url('Xmas.png') center/cover no-repeat;
-    padding-top:16vh;
+    background-image:url('Xmas.png') !important; /* Mobile */
+    background-position:center !important;
+    background-size:cover !important;
+    background-repeat:no-repeat !important;
   }
 }
 
@@ -40,19 +46,25 @@ body{
   letter-spacing:3px;
   text-shadow:0 0 8px #00eaff,0 0 15px #00eaff;
 }
+
 .title::before,
 .title::after{
   content:"MERRY CHRISTMAS";
-  position:absolute;left:0;width:100%;
+  position:absolute;
+  left:0;
+  width:100%;
 }
+
 .title::before{
   text-shadow:-2px 0 magenta;
-  animation:glitch 2s infinite;
+  animation:glitch 2.2s infinite;
 }
+
 .title::after{
   text-shadow:2px 0 cyan;
-  animation:glitch 2s infinite reverse;
+  animation:glitch 2.2s infinite reverse;
 }
+
 @keyframes glitch{
   0%{clip-path:inset(0 0 80% 0);}
   20%{clip-path:inset(20% 0 55% 0);}
@@ -62,9 +74,10 @@ body{
 }
 
 .subtitle{
-  margin-top:10px;
-  font-size:1.25rem;
+  margin-top:12px;
+  font-size:1.2rem;
 }
+
 .subtitle a{
   color:#00eaff;
   text-shadow:0 0 8px #00eaff;
@@ -77,44 +90,40 @@ body{
   justify-content:center;
   gap:20px;
 }
+
 .time-box span:first-child{
   font-size:1.8rem;
   display:block;
   font-weight:bold;
   text-shadow:0 0 8px #00eaff;
 }
-.time-box small{
-  font-size:.7rem;
-  opacity:0.8;
-}
+
+.time-box small{font-size:.7rem;opacity:0.8;}
 
 .snowflake{
   position:fixed;
   top:-10px;
   color:#fff;
-  font-size:12px;
+  font-size:10px;
   pointer-events:none;
   animation:fall linear infinite;
 }
+
 @keyframes fall{
-  to{transform:translateY(120vh);}
+  to{transform:translateY(110vh);}
 }
 
 @media(max-width:600px){
-  .title{font-size:2.3rem;}
-  .countdown{
-    gap:10px;
-  }
-  .time-box span:first-child{
-    font-size:1.3rem;
-  }
+  .title{font-size:2.4rem;}
+  .countdown{gap:12px;}
+  .time-box span:first-child{font-size:1.4rem;}
 }
 </style>
 </head>
 
 <body>
 
-<div style="text-align:center; width:100%;">
+<div class="hero" style="text-align:center;position:absolute;top:12%;width:100%;">
   <div class="title">MERRY CHRISTMAS</div>
 
   <div class="subtitle">
@@ -144,20 +153,20 @@ setInterval(()=>{
   document.getElementById("seconds").innerText = Math.floor((diff%60000)/1000);
 },1000);
 
-for(let i=0;i<90;i++){
+for(let i=0;i<80;i++){
   let s = document.createElement("div");
   s.className = "snowflake";
   s.textContent = "❄";
   s.style.left = Math.random()*100+"vw";
-  s.style.fontSize = (8+Math.random()*14)+"px";
+  s.style.fontSize = (8+Math.random()*10)+"px";
   s.style.opacity = Math.random();
-  s.style.animationDuration = (4+Math.random()*7)+"s";
+  s.style.animationDuration = (4+Math.random()*6)+"s";
   document.body.appendChild(s);
 }
 
 document.addEventListener("click", () => {
-  const a = document.getElementById("bgmusic");
-  if(a.paused){ a.play().catch(()=>{}); }
+  const audio = document.getElementById("bgmusic");
+  if(audio.paused){ audio.play().catch(()=>{}); }
 });
 </script>
 
