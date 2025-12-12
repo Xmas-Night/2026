@@ -16,13 +16,13 @@ body{
   height:100vh;
   width:100vw;
   overflow:hidden;
-  background:url('Xmas.png') center/cover no-repeat fixed;
+  background:url('Xmas.png') center/cover no-repeat;
   display:flex;justify-content:center;align-items:center;
   color:#fff;
 }
 
 .title{
-  font-size:3.5rem;
+  font-size:3.2rem;
   font-weight:900;
   position:relative;
   color:#00d9ff;
@@ -44,7 +44,7 @@ body{
 }
 @keyframes glitch{
   0%{clip-path:inset(0 0 80% 0);}
-  20%{clip-path:inset(20% 0 50% 0);}
+  20%{clip-path:inset(20% 0 55% 0);}
   50%{clip-path:inset(60% 0 20% 0);}
   80%{clip-path:inset(10% 0 70% 0);}
   100%{clip-path:inset(0 0 80% 0);}
@@ -59,7 +59,6 @@ body{
   text-shadow:0 0 8px #00eaff;
   text-decoration:none;
 }
-.subtitle a:hover{color:#fff;}
 
 .countdown{
   margin-top:25px;
@@ -75,18 +74,6 @@ body{
 }
 .time-box small{font-size:.7rem;opacity:0.8;}
 
-.music{
-  position:absolute;
-  top:20px;right:20px;
-  background:#00d9ff33;
-  padding:10px 15px;
-  border-radius:10px;
-  border:1px solid #00eaff88;
-  backdrop-filter:blur(5px);
-  cursor:pointer;
-  color:#fff;
-}
-
 .snowflake{
   position:fixed;
   top:-10px;
@@ -100,8 +87,11 @@ body{
 }
 
 @media(max-width:600px){
+  body{
+    background:url('Xmas.png') center/cover no-repeat;
+  }
   .title{font-size:2.3rem;}
-  .countdown{gap:12px;}
+  .countdown{gap:10px;}
   .time-box span:first-child{font-size:1.3rem;}
 }
 </style>
@@ -109,7 +99,7 @@ body{
 
 <body>
 
-<div class="hero" style="text-align:center;position:absolute;top:10%;width:100%;">
+<div class="hero" style="text-align:center;position:absolute;top:12%;width:100%;">
   <div class="title">MERRY CHRISTMAS</div>
 
   <div class="subtitle">
@@ -124,13 +114,12 @@ body{
   </div>
 </div>
 
-<button class="music" onclick="toggleMusic()">Music: Off</button>
-
-<audio id="bgmusic" loop>
+<audio id="bgmusic" autoplay loop>
   <source src="xmas.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+/* ---------- COUNTDOWN ---------- */
 const target = new Date(2025,11,25).getTime();
 setInterval(()=>{
   const now = Date.now();
@@ -141,7 +130,7 @@ setInterval(()=>{
   document.getElementById("seconds").innerText = Math.floor((diff%60000)/1000);
 },1000);
 
-for(let i=0;i<90;i++){
+for(let i=0;i<80;i++){
   let s = document.createElement("div");
   s.className = "snowflake";
   s.textContent = "❄";
@@ -152,21 +141,10 @@ for(let i=0;i<90;i++){
   document.body.appendChild(s);
 }
 
-function toggleMusic(){
+document.addEventListener("click", () => {
   const audio = document.getElementById("bgmusic");
-  const btn = document.querySelector(".music");
-
-  if(audio.paused){
-    audio.play().then(()=>{
-      btn.textContent = "Music: On";
-    }).catch(err=>{
-      console.log("Blocked:", err);
-    });
-  }else{
-    audio.pause();
-    btn.textContent = "Music: Off";
-  }
-}
+  if(audio.paused){ audio.play().catch(()=>{}); }
+});
 </script>
 
 </body>
